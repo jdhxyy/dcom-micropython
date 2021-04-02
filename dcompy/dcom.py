@@ -14,16 +14,11 @@ import uasyncio as asyncio
 def load(param: LoadParam):
     set_load_param(param)
     rx_load()
-    _thread.start_new_thread(_main_thread, ())
+    _main_thread()
 
 
 def _main_thread():
-    loop = asyncio.new_event_loop()
+    loop = asyncio.get_event_loop()
     loop.create_task(block_rx_run())
     loop.create_task(block_tx_run())
     loop.create_task(waitlist_run())
-    try:
-        loop.run_forever()
-    except KeyboardInterrupt:
-        pass
-    loop.close()
