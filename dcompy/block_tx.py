@@ -179,7 +179,8 @@ def _check_item_and_deal_back_frame(protocol: int, pipe: int, src_ia: int, frame
         return False
     start_offset = (frame.payload[0] << 8) + frame.payload[1]
     if start_offset >= len(item.data):
-        log.warn('block rx receive back deal failed!token:%d start offset:%d > data len:%d"', item.token, start_offset,
+        # 发送完成
+        log.info('block tx end.receive back token:%d start offset:%d >= data len:%d"', item.token, start_offset,
                  len(item.data))
         _items.remove(item)
         return True
