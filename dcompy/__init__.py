@@ -6,4 +6,4 @@ from dcompy.waitlist import call, call_async
 from dcompy.system_error import *
 from dcompy.log import set_filter_level
 
-__version__ = '1.2'
+__version__ = '1.3'

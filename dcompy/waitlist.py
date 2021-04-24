@@ -45,18 +45,14 @@ async def waitlist_run():
     """
     模块运行.检查等待列表重发,超时等
     """
-    while True:
-        _check_wait_items()
-        await asyncio.sleep(INTERVAL)
-
-
-def _check_wait_items():
     global _lock
 
-    _lock.acquire()
-    for item in _items:
-        _retry_send(item)
-    _lock.release()
+    while True:
+        _lock.acquire()
+        for item in _items:
+            _retry_send(item)
+        _lock.release()
+        await asyncio.sleep(INTERVAL)
 
 
 def _retry_send(item: _Item):
